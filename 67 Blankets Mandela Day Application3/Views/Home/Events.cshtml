@@ -1,0 +1,283 @@
+﻿@{
+    ViewBag.Title = "Events";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+    <style>
+        /* Global Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed; /* Make sidebar fixed */
+            top: 60px; /* Sit below the navbar */
+            left: 0; /* Align to the left */
+            height: calc(100vh - 60px); /* Full height minus navbar */
+            width: 250px;
+            background-color: black; /* Match hero background color */
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 0 10px 10px 0; /* Rounded right corners */
+            transition: left 0.3s; /* Smooth transition for sidebar */
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 15px 20px;
+                text-decoration: none;
+                display: block;
+                font-weight: bold;
+                transition: background-color 0.3s;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+                .sidebar a:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #000000;
+                }
+
+        /* Menu button */
+        .menu-button {
+            position: fixed;
+            top: 10px; /* Position at the top */
+            left: 10px; /* Align to the left */
+            background-color: black; /* Same color as sidebar */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1100; /* Above sidebar */
+            transition: background-color 0.3s;
+            color: white;
+        }
+
+            .menu-button:hover {
+                background-color: white;
+                color: #fff;
+            }
+
+        /* Event Section */
+        .event-section {
+            max-width: 800px;
+            margin: 60px auto;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Event Details */
+        .event-details {
+            margin-bottom: 30px;
+        }
+
+            .event-details h3 {
+                font-size: 1.8em;
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            .event-details p {
+                font-size: 1em;
+                line-height: 1.6;
+                color: #555;
+            }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+            .image-gallery img {
+                width: 100%;
+                border-radius: 8px;
+                transition: transform 0.2s;
+            }
+
+                .image-gallery img:hover {
+                    transform: scale(1.05);
+                }
+
+        /* Registration Form */
+        .registration-form {
+            margin-top: 40px;
+        }
+
+            .registration-form h4 {
+                font-size: 1.5em;
+                color: #333;
+                margin-bottom: 20px;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                color: #444;
+                margin-bottom: 5px;
+            }
+
+            .form-group input,
+            .form-group select {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 1em;
+                transition: border-color 0.3s;
+            }
+
+                .form-group input:focus,
+                .form-group select:focus {
+                    border-color: #007BFF;
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                    outline: none;
+                }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+            .submit-button:hover {
+                background-color: #007bff;
+                transform: scale(1.05);
+            }
+
+        .note {
+            font-size: 0.9em;
+            color: #888;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menu Button -->
+    <button class="menu-button" onclick="toggleSidebar()">☰ Menu</button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="javascript:void(0)" onclick="toggleSidebar()">Close ×</a>
+        <a href="@Url.Action("Index", "Home")">Home</a>
+        <a href="@Url.Action("About", "Home")">About Us</a>
+        <a href="@Url.Action("Ambassador", "Home")">Ambassador Form</a>
+        <a href="@Url.Action("Donor", "Home")">Donor Form</a>
+        <a href="@Url.Action("Contact", "Home")">Contact Us</a>
+        <a href="@Url.Action("Admin_Login", "Home")"> Admin</a>
+    </div>
+
+    <!-- Main Event Content -->
+    <div class="event-section">
+        <h2>Upcoming Events</h2>
+
+        <div class="event-details">
+            <h3>Community Clean-Up Day</h3>
+            <p>Date: November 19, 2024</p>
+            <p>Time: 9:00 AM - 1:00 PM</p>
+            <p>Location:Theodor Herzl Schools, 14th Ave, Walmer, Gqeberha, 6070,</p>
+            <p>Description: Join us for a day of community service as we clean up our local parks. Supplies will be provided.</p>
+        </div>
+        <div class="map-container">
+            <h3>The Location </h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3308.564242150809!2d25.55920217571339!3d-33.978038073185154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e7ad1f43e26fe8b%3A0xa2ab60757dc5ba9d!2sTheodor%20Herzl%20Schools!5e0!3m2!1sen!2sza!4v1730321728719!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="event-details">
+            <h3>Annual Fundraising Gala</h3>
+            <p>Date: November 15, 2024</p>
+            <p>Time: 3:00 PM - 6:00 PM</p>
+            <p>Location: Wirts Linder Auditorium, 27 St Andrews Rd, Partown,Johannesburg</p>
+            <p>Description: Attend our annual gala to raise funds for our programs. Enjoy dinner, entertainment, and a silent auction!</p>
+        </div>
+
+        <div class="map-container">
+            <h3>The Location</h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.5705070270915!2d28.039414375082576!3d-26.17811356291131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c15589b6fd9%3A0xb82b6d6f6254398f!2sWits%20Linder%20Auditorium!5e0!3m2!1sen!2sza!4v1730307401947!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <h3>Event Gallery</h3>
+        <div class="image-gallery">
+            <img src="~/images/Event_1.jpg" alt="Event 1">
+            <img src="/images/Event_2.jpg" alt="Event 2">
+            <img src="/images/event_3.jpg" alt="Event 3">
+            <img src="~/images/event_3.jpg" alt="Event 4">
+        </div>
+
+        <div class="registration-form">
+            <h4>Register for an Event</h4>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="event">Select Event:</label>
+                    <select id="event" name="event" required>
+                        <option value="clean-up">Community Clean-Up Day</option>
+                        <option value="gala">Annual Fundraising Gala</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-button">Register</button>
+            </form>
+            <p class="note">Thank you for registering! We look forward to seeing you.</p>
+        </div>
+    </div>
+
+    <!-- Script for Sidebar Toggle -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.left = sidebar.style.left === '-250px' ? '0' : '-250px';
+        }
+    </script>
+
+</body>
+</html>

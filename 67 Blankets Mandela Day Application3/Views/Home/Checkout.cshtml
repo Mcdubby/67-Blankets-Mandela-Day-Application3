@@ -1,0 +1,257 @@
+﻿@{
+    ViewBag.Title = "Checkout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-image: url('/images/background.jpg'); /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        /* Container */
+        .checkout-form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #007BFF;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .info-text, .checkout-message {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #333;
+            padding: 10px;
+            background-color: #e7f1ff;
+            border-radius: 4px;
+        }
+
+        /* Input fields with icons */
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px;
+            transition: border-color 0.2s;
+        }
+
+            .input-group:hover {
+                border-color: #007BFF;
+            }
+
+            .input-group i {
+                color: #007BFF;
+                margin-right: 10px;
+                font-size: 18px;
+            }
+
+            .input-group input {
+                width: 100%;
+                padding: 12px;
+                border: none;
+                font-size: 14px;
+            }
+
+                .input-group input:focus {
+                    outline: none;
+                }
+
+        /* Button */
+        button {
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        .sidebar {
+            position: fixed; /* Make sidebar fixed */
+            top: 60px; /* Sit below the navbar */
+            left: 0; /* Align to the left */
+            height: calc(100vh - 60px); /* Full height minus navbar */
+            width: 250px;
+            background-color: black; /* Match hero background color */
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 0 10px 10px 0; /* Rounded right corners */
+            transition: left 0.3s; /* Smooth transition for sidebar */
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 15px 20px;
+                text-decoration: none;
+                display: block;
+                font-weight: bold;
+                transition: background-color 0.3s;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+                .sidebar a:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #000000;
+                }
+
+        .menu-button {
+            position: fixed;
+            top: 10px; /* Position at the top */
+            left: 10px; /* Align to the left edge */
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1100;
+            transition: background-color 0.3s;
+        }
+
+            .menu-button:hover {
+                background-color: white;
+                color: #007BFF;
+            }
+    </style>
+</head>
+<body>
+   
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="javascript:void(0)" onclick="toggleSidebar()">Close ×</a>
+        <a href="@Url.Action("Index", "Home")">Home</a>
+        <a href="@Url.Action("About", "Home")">About Us</a>
+        <a href="@Url.Action("Ambassador", "Home")">Ambassador Form</a>
+        <a href="@Url.Action("Donor", "Home")">Donor Form</a>
+        <a href="@Url.Action("Events", "Home")"> Events</a>
+        <a href="@Url.Action("Contact", "Home")">Contact Us</a>
+        <a href="@Url.Action("Admin_Login", "Home")"> Admin</a>
+    </div>
+
+
+
+    <div class="checkout-message">
+        <p>
+            You are now on the secure checkout page. Here, you can review your order details, confirm your purchase, and enter the necessary information to complete your transaction. Please rest assured that all personal and payment information is securely encrypted and protected according to the highest industry standards.
+        </p>
+        <p>
+            We are committed to safeguarding your data. Once your order is confirmed, you’ll receive an email with a summary and a receipt. If you have any questions, our support team is here to assist you. Thank you for shopping with us!
+        </p>
+    </div>
+
+    <div class="checkout-form">
+        <h2>Checkout</h2>
+        <p class="info-text">Please fill in the information below to complete your purchase securely.</p>
+        <form id="checkoutForm">
+            <label for="fullName">Full Name:</label>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+            </div>
+
+            <label for="email">Email:</label>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+            </div>
+
+            <label for="address">Shipping Address:</label>
+            <div class="input-group">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" id="address" name="address" placeholder="Enter your shipping address" required>
+            </div>
+
+            <label for="cardNumber">Card Number:</label>
+            <div class="input-group">
+                <i class="fas fa-credit-card"></i>
+                <input type="number" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+            </div>
+
+            <label for="expiryDate">Expiry Date:</label>
+            <div class="input-group">
+                <i class="fas fa-calendar-alt"></i>
+                <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+            </div>
+
+            <label for="cvv">CVV:</label>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="number" id="cvv" name="cvv" placeholder="123" required>
+            </div>
+
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("checkoutForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            // Add payment processing code here
+
+            // Redirect to the thank-you page
+            window.location.href = "Thank_you_Check"; // Change to your actual thank-you page URL
+        });
+    </script>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            var mainContent = document.getElementById("mainContent");
+
+            if (sidebar.style.left === "0px") {
+                sidebar.style.left = "-250px"; // Hide sidebar
+                mainContent.style.marginLeft = "0";
+            } else {
+                sidebar.style.left = "0"; // Show sidebar
+                mainContent.style.marginLeft = "250px";
+            }
+        }
+    </script>
+</body>
+</html>

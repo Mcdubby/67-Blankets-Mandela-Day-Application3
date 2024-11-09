@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Admin Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('/images/background.jpg'); /* Update with your actual image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent for better contrast */
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+            .login-container h2 {
+                margin-bottom: 1.5rem;
+                color: #333;
+            }
+
+            .login-container label {
+                display: block;
+                text-align: left;
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+            }
+
+            .login-container input[type="text"],
+            .login-container input[type="password"] {
+                width: 100%;
+                padding: 0.75rem;
+                margin-bottom: 1rem;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 1rem;
+            }
+
+            .login-container button {
+                width: 100%;
+                padding: 0.75rem;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+                .login-container button:hover {
+                    background-color: #0056b3;
+                }
+
+        .error-message {
+            color: red;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <div id="error-message" class="error-message" style="display: none;">Invalid username or password.</div>
+        <form onsubmit="return validateLogin()">
+            <label for="email">Username</label>
+            <input type="text" id="email" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function validateLogin() {
+            const username = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Replace with actual validation logic
+            if (username === "Pera@gmail.com" && password === "888222") {
+                window.location.href = "@Url.Action("Admin", "Home")";
+                return false;
+            } else {
+                document.getElementById("error-message").style.display = "block";
+                return false;
+            }
+        }
+    </script>
+
+</body>
+</html>

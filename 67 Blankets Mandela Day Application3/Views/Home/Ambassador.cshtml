@@ -1,0 +1,263 @@
+﻿@{
+    ViewBag.Title = "Ambassador";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed; /* Make sidebar fixed */
+            top: 60px; /* Sit below the navbar */
+            left: 0; /* Align to the left */
+            height: calc(100vh - 60px); /* Full height minus navbar */
+            width: 250px;
+            background-color: black; /* Match hero background color */
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 0 10px 10px 0; /* Rounded right corners */
+            transition: left 0.3s; /* Smooth transition for sidebar */
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 15px 20px;
+                text-decoration: none;
+                display: block;
+                font-weight: bold;
+                transition: background-color 0.3s;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+                .sidebar a:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #000000;
+                }
+
+        /* Menu button */
+        .menu-button {
+            position: fixed;
+            top: 10px; /* Position at the top */
+            left: 10px; /* Align to the left */
+            background-color: black; /* Same color as sidebar */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1100; /* Above sidebar */
+            transition: background-color 0.3s;
+            color: white;
+        }
+
+            .menu-button:hover {
+                background-color: white;
+                color: #fff;
+            }
+        /* Form Container */
+        .form-container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 40px;
+            margin: 40px auto;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            color: #333;
+        }
+
+            .form-container h3 {
+                font-size: 1.75em;
+                color: #333;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                color: #444;
+                margin-bottom: 5px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 1em;
+                transition: border-color 0.3s;
+            }
+
+                .form-group input:focus,
+                .form-group select:focus,
+                .form-group textarea:focus {
+                    border-color: #007BFF;
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                    outline: none;
+                }
+
+        /* Submit Button */
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+            .submit-button:hover {
+                background-color: #007bff;
+                transform: scale(1.05);
+            }
+
+        .note {
+            font-size: 0.9em;
+            color: #888;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Success Message Styling */
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menu Button -->
+    <button class="menu-button" onclick="toggleSidebar()">☰ Menu</button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="javascript:void(0)" onclick="toggleSidebar()">Close ×</a>
+        <a href="@Url.Action("Index", "Home")">Home</a>
+        <a href="@Url.Action("About", "Home")">About Us</a>
+        <a href="@Url.Action("Ambassador", "Home")">Ambassador Form</a>
+        <a href="@Url.Action("Donor", "Home")">Donor Form</a>
+        <a href="@Url.Action("Contact", "Home")">Contact Us</a>
+        <a href="@Url.Action("Admin_Login", "Home")">Admin</a>
+    </div>
+
+    <!-- Main Form Content -->
+    <div class="form-container" id="formContainer">
+        <h2>Ambassador Form</h2>
+        <h3>Join Our Team</h3>
+        <p>We’re excited that you’re interested in becoming an ambassador. Fill out the form below to get started!</p>
+
+        <form id="ambassadorForm">
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth (YYYYMMDD):</label>
+                <input type="text" id="dob" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country" value="South Africa" required>
+            </div>
+
+            <div class="form-group">
+                <label for="organization">Organization:</label>
+                <input type="text" id="organization" name="organization" value="67 Blankets" required>
+            </div>
+
+            <div class="form-group">
+                <label for="socialMedia">Social Media Handle:</label>
+                <input type="text" id="socialMedia" name="socialMedia">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Submit Application</button>
+        </form>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            Thank you! Your application has been submitted successfully.
+        </div>
+
+        <p class="note">Thank you for your interest in supporting our cause!</p>
+    </div>
+
+    <!-- Script for Sidebar Toggle and Form Submission Message -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.left = sidebar.style.left === '-250px' ? '0' : '-250px';
+        }
+
+        // Form submission handler to show success message
+        document.getElementById('Ambassador').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Hide the form and show success message
+            document.getElementById('formContainer').style.display = 'none'; // Hide the form container
+            document.getElementById('successMessage').style.display = 'block'; // Show the success message
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css" /> <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="~/Content/site.css" />
+    <style>
+        body {
+            background-image: url('/images/background.jpg'); /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .hero {
+            background-color: rgb(255 0 0);
+            padding: 5rem 0;
+            color: #fff;
+            text-align: center;
+            border-radius: 0 0 30px 30px; /* Rounded bottom corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+            }
+
+        .btn-light {
+            background-color: #ffd700;
+            color: #004085;
+            border-radius: 20px;
+            padding: 10px 20px;
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: bold;
+        }
+
+            .btn-light:hover {
+                background-color: #ffc107;
+                color: #fff;
+            }
+
+        .testimonials {
+            background-color: #e9ecef;
+            padding: 2rem 0;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+            .card:hover {
+                transform: scale(1.05);
+            }
+
+        .card-img-top {
+            object-fit: cover;
+            height: 200px;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            position: fixed; /* Make sidebar fixed */
+            top: 60px; /* Sit below the navbar */
+            left: 0; /* Align to the left */
+            height: calc(100vh - 60px); /* Full height minus navbar */
+            width: 250px;
+            background-color: black; /* Match hero background color */
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 0 10px 10px 0; /* Rounded right corners */
+            transition: left 0.3s; /* Smooth transition for sidebar */
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 15px 20px;
+                text-decoration: none;
+                display: block;
+                font-weight: bold;
+                transition: background-color 0.3s;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+                .sidebar a:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #000000;
+                }
+
+        /* Main content adjustment */
+        .content {
+            margin-left: 250px; /* Space for sidebar */
+            margin-top: 60px; /* Ensure content starts below the navbar */
+            padding: 20px; /* Added padding for main content */
+            transition: margin-left 0.3s; /* Smooth transition for content */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        /* Menu button styling */
+        .menu-button {
+            position: fixed;
+            top: 10px; /* Position at the top */
+            left: 10px; /* Align to the left */
+            background-color: black; /* Same color as sidebar */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1100; /* Above sidebar */
+            transition: background-color 0.3s;
+            color: white;
+        }
+
+            .menu-button:hover {
+                background-color: white;
+                color: #fff;
+            }
+
+        /* Text shadow for better readability */
+        h1, h2, h3, p {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: rgba(0, 32, 128, 0.9);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Button -->
+    <button class="menu-button" onclick="toggleSidebar()">☰ Menu</button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="javascript:void(0)" onclick="toggleSidebar()">Close ×</a>
+        <a href="@Url.Action("Index", "Home")">Home</a>
+        <a href="@Url.Action("About", "Home")">About Us</a>
+        <a href="@Url.Action("Ambassador", "Home")">Ambassador Form</a>
+        <a href="@Url.Action("Donor", "Home")">Donor Form</a>
+        <a href="@Url.Action("Events", "Home")"> Events</a>
+        <a href="@Url.Action("Contact", "Home")">Contact Us</a>
+        <a href="@Url.Action("Admin_Login", "Home")"> Admin</a>
+    </div>
+
+    <!-- Main content -->
+    <div class="content" id="mainContent">
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1>Welcome to 67 Blankets Mandela Day</h1>
+            <p>Join us in spreading warmth and love to those in need</p>
+            <a href="@Url.Action("Register", "Account")" class="btn btn-light btn-lg">Get Involved</a>
+        </header>
+
+        <!-- About Us Section -->
+        <section class="about py-5">
+            <h2 class="text-center">About Us</h2>
+            <p class="text-center">
+                67 Blankets Mandela Day is a heartfelt initiative founded to celebrate the legacy of Nelson Mandela by bringing people together to knit and crochet blankets for the less fortunate. What started as a simple act of kindness has transformed into a powerful movement, with thousands of volunteers from all walks of life contributing to Mandela's vision of unity and compassion. This initiative not only provides warmth and comfort to those in need but also strengthens communities, empowering people to come together and make a tangible difference. Every blanket created is a unique expression of love, a symbol of hope, and a testament to the resilience and generosity of the human spirit.
+            </p>
+            <p class="text-center">
+                Our mission is to unite communities across South Africa and beyond, through the art of knitting and crocheting, to provide warmth, comfort, and hope for the underprivileged. This movement encourages people of all skill levels—whether you are an experienced knitter or just learning—to join hands in crafting blankets that carry messages of care and solidarity. Through workshops, knitting circles, and events, we aim to foster an environment where people feel connected, valued, and inspired to contribute to a cause larger than themselves. Together, we create more than just blankets; we build a network of love, resilience, and support that reaches into every corner of the community.
+            </p>
+            <p class="text-center">
+                By joining 67 Blankets Mandela Day, you become part of a global effort to uphold Mandela’s vision of compassion, justice, and equality for all. Volunteers can get involved in various ways, from donating materials and attending knitting sessions to sharing the initiative within their communities. Each blanket we produce is a symbol of our commitment to Mandela’s dream for a better world. As we weave together these threads of kindness, we create a tapestry of hope and connection that reminds everyone involved that they are not alone. Together, we have the power to uplift lives and inspire a spirit of giving that carries forward Mandela’s legacy for generations to come.
+            </p>
+
+        </section>
+
+        <!-- Events Section -->
+        <section class="events py-5">
+            <h2 class="text-center">Upcoming Events</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="~/Images/Event_1.jpg" class="card-img-top" alt="Event 1" />
+                        <div class="card-body">
+                            <h5 class="card-title">Knit-A-Thon</h5>
+                            <p class="card-text">Join us for a day of knitting to create beautiful blankets.</p>
+                            <p class="card-text"><small class="text-muted">Date: January 25, 2025</small></p>
+                            <a href="@Url.Action("Register", "Account")" class="btn btn-light">Register</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="~/Images/Event_2.jpg" class="card-img-top" alt="Event 2" />
+                        <div class="card-body">
+                            <h5 class="card-title">Donation Drive</h5>
+                            <p class="card-text">Help us collect materials for our next knitting session.</p>
+                            <p class="card-text"><small class="text-muted">Date: February 15, 2025</small></p>
+                            <a href="@Url.Action("Ambassodor", "Home")" class="btn btn-light">Get Involved</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="~/Images/event_3.jpg" class="card-img-top" alt="Event 3" />
+                        <div class="card-body">
+                            <h5 class="card-title">Blanket Distribution</h5>
+                            <p class="card-text">Help us spread the warmth by delivering blankets to communities in need.</p>
+                            <p class="card-text"><small class="text-muted">Date: March 10, 2025</small></p>
+                            <a href="@Url.Action("Events", "Home")" class="btn btn-light">Volunteer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    
+
+    <!-- JavaScript -->
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            var mainContent = document.getElementById("mainContent");
+
+            if (sidebar.style.left === "0px") {
+                sidebar.style.left = "-250px"; // Hide sidebar
+                mainContent.style.marginLeft = "0";
+            } else {
+                sidebar.style.left = "0"; // Show sidebar
+                mainContent.style.marginLeft = "250px";
+            }
+        }
+    </script>
+</body>
+</html>

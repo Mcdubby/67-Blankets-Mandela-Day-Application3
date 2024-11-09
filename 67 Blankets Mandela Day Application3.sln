@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "67 Blankets Mandela Day Application3", "67 Blankets Mandela Day Application3\67 Blankets Mandela Day Application3.csproj", "{DDDCA1EF-9495-440D-A0D8-0EA016607186}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDDCA1EF-9495-440D-A0D8-0EA016607186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDCA1EF-9495-440D-A0D8-0EA016607186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDCA1EF-9495-440D-A0D8-0EA016607186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDDCA1EF-9495-440D-A0D8-0EA016607186}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AC4B843-2043-4003-A72C-0609C64EF5FA}
+	EndGlobalSection
+EndGlobal

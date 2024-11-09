@@ -1,0 +1,215 @@
+﻿@model _67_Blankets_Mandela_Day_Application3.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="d-flex flex-column min-vh-100">
+    <!-- Main content container -->
+    <div class="container-fluid flex-grow-1 d-flex justify-content-center align-items-center">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h1 class="text-center text-danger">67 Blankets</h1>
+                    <h3 class="text-center">@ViewBag.Title</h3>
+                    <h4 class="text-center">Create a new account</h4>
+                    <hr />
+
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FirstName, new { @class = "control-label font-weight-bold" })
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-lg", placeholder = "First Name" })
+                            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.LastName, new { @class = "control-label font-weight-bold" })
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-lg", placeholder = "Last Name" })
+                            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label font-weight-bold" })
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control form-control-lg", placeholder = "Phone Number" })
+                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label font-weight-bold" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", placeholder = "Email Address" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "control-label font-weight-bold" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-lg", placeholder = "Password" })
+                            <div class="password-strength">
+                                <div class="strength-indicator" id="strength-indicator"></div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label font-weight-bold" })
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control form-control-lg", placeholder = "Confirm Password" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="termsCheck" required />
+                            <label class="form-check-label" for="termsCheck">I agree to the <a href="#" data-toggle="modal" data-target="#termsModal">terms and conditions</a>.</label>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <input type="submit" class="btn btn-danger btn-lg btn-block" value="Register" />
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <p class="mb-0">Already have an account? @Html.ActionLink("Log in here", "Login", "Account", null, new { @class = "text-dark font-weight-bold" })</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<!-- Terms Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Here are the terms and conditions...</p>
+                <!-- Add your terms and conditions text here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        // Password strength indicator script
+        const passwordInput = document.querySelector('input[name="Password"]');
+        const strengthIndicator = document.getElementById('strength-indicator');
+
+        passwordInput.addEventListener('input', () => {
+            const password = passwordInput.value;
+            let strength = 0;
+
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[\W_]/.test(password)) strength++;
+
+            strengthIndicator.style.width = (strength * 20) + '%'; // 0 to 100%
+            strengthIndicator.className = 'strength-' + (strength > 2 ? 'strong' : (strength > 1 ? 'medium' : 'weak'));
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        /* Full viewport height for centering */
+        .vh-100 {
+            height: 100vh; /* Full viewport height */
+        }
+
+        /* Background image for the registration page */
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            color: #fff;
+        }
+
+        .card {
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #c0392b;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #c0392b;
+        }
+
+        h3, h4 {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            border: 1px solid #c0392b;
+        }
+
+            .form-control:focus {
+                border-color: #a93226;
+                box-shadow: 0 0 5px rgba(192, 57, 43, 0.5);
+            }
+
+        .text-danger {
+            font-size: 0.875rem;
+        }
+
+        .btn-danger {
+            background-color: #c0392b;
+            border-color: #c0392b;
+            transition: background-color 0.3s;
+        }
+
+            .btn-danger:hover {
+                background-color: #a93226;
+            }
+
+        .strength-indicator {
+            height: 5px;
+            background-color: red;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .strength-weak {
+            background-color: red;
+        }
+
+        .strength-medium {
+            background-color: orange;
+        }
+
+        .strength-strong {
+            background-color: green;
+        }
+
+        /* Sticky footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+    </style>
+}

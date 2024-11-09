@@ -1,0 +1,290 @@
+﻿<div class="about-us-header">
+    @{ ViewBag.Title = "About Us";
+                    ViewBag.Message = "Our Mission and Story"; }
+</div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 67 Blankets Mandela Day Application</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <style>
+        /* Sidebar styling */
+        .sidebar {
+            position: fixed; /* Make sidebar fixed */
+            top: 60px; /* Sit below the navbar */
+            left: 0; /* Align to the left */
+            height: calc(100vh - 60px); /* Full height minus navbar */
+            width: 250px;
+            background-color: black; /* Match hero background color */
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 0 10px 10px 0; /* Rounded right corners */
+            transition: left 0.3s; /* Smooth transition for sidebar */
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 15px 20px;
+                text-decoration: none;
+                display: block;
+                font-weight: bold;
+                transition: background-color 0.3s;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+                .sidebar a:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #000000;
+                }
+
+        /* Menu button styling */
+        .menu-button {
+            position: fixed;
+            top: 10px; /* Position at the top */
+            left: 10px; /* Align to the left */
+            background-color: black; /* Same color as sidebar */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1100; /* Above sidebar */
+            transition: background-color 0.3s;
+        }
+
+            .menu-button:hover {
+                background-color: white;
+                color: #000000;
+            }
+
+        /* About Page styles */
+        .about-page h3 {
+            margin-top: 30px;
+            font-size: 24px; /* Increased font size */
+            color: #333; /* Darker color */
+        }
+
+        .founder-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px; /* Rounded corners */
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        }
+
+        .testimonial {
+            margin: 20px 0;
+            background-color: #f9f9f9; /* Light background */
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 5px solid #007bff; /* Emphasis border */
+        }
+
+        .testimonial-header {
+            background-color: #ffffff; /* White background */
+            padding: 20px; /* Add some padding */
+            border-radius: 5px; /* Optional: Adds rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+            margin: 20px 0; /* Optional: Adds margin for spacing */
+        }
+        .Partnerships-header {
+            background-color: #ffffff; /* White background */
+            padding: 20px; /* Add some padding */
+            border-radius: 5px; /* Optional: Adds rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+            margin: 20px 0; /* Optional: Adds margin for spacing */
+        }
+
+        .About-header {
+            background-color: #ffffff; /* White background */
+            padding: 20px; /* Add some padding */
+            border-radius: 5px; /* Optional: Adds rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+            margin: 20px 0; /* Optional: Adds margin for spacing */
+        }
+        .about-us-header {
+    background-color: #ffffff; /* White background */
+    padding: 20px; /* Add padding for spacing */
+    border-radius: 5px; /* Optional: Adds rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+    margin: 20px 0; /* Optional: Adds margin for spacing */
+}
+
+        .Founder-header {
+            background-color: #ffffff; /* White background */
+            padding: 20px; /* Add some padding */
+            border-radius: 5px; /* Optional: Adds rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+            margin: 20px 0; /* Optional: Adds margin for spacing */
+            
+            
+        }
+
+
+       
+
+    </style>
+</head>
+<body>
+    <!-- Toggle Button -->
+    <button id="toggleSidebar" class="menu-button" onclick="toggleSidebar()">Menu</button> <!-- Menu Button -->
+
+    <div class="sidebar" id="sidebar" style="left: -250px;">
+        <a href="javascript:void(0)" onclick="toggleSidebar()">Close ×</a>
+        <a href="@Url.Action("Index", "Home")">Home</a>
+        <a href="@Url.Action("About", "Home")">About Us</a>
+        <a href="@Url.Action("Ambassador", "Home")">Ambassador Form</a>
+        <a href="@Url.Action("Donor", "Home")">Donor Form</a>
+        <a href="@Url.Action("Contact", "Home")">Contact Us</a>
+        <a href="@Url.Action("Admin_Login", "Home")"> Admin</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" id="mainContent" style="margin-left: 0;">
+        <div class="container about-page">
+            <!-- Header Section -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1>@ViewBag.Title</h1>
+                    <p class="lead">@ViewBag.Message</p>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="row about-section">
+                <div class="col-md-6">
+                    <div class="About-header">
+                        <h3>About 67 Blankets Mandela Day Application</h3>
+                    </div>
+                        <p>
+                            67 Blankets Mandela Day Application is dedicated to making a difference by knitting and crocheting blankets for those in need.
+                            Inspired by the legacy of Nelson Mandela, we strive to bring warmth and comfort to underprivileged communities, one blanket at a time.
+                        </p>
+                        <p>
+                            Our mission is simple yet powerful: to unite people in a global initiative of giving, while continuing the ethos of Madiba's humanitarian efforts.
+                            With the help of volunteers worldwide, we create and distribute blankets that symbolize hope and compassion.
+                        </p>
+                        <h4>Our History</h4>
+                        <p>
+                            Founded in 2014, 67 Blankets Mandela Day Application began as a grassroots initiative aimed at honoring Nelson Mandela’s legacy.
+                            Over the years, we have grown into a community-driven movement, mobilizing thousands of volunteers to create and distribute blankets across South Africa and beyond.
+                        </p>
+                        <h4>Our Impact</h4>
+                        <p>
+                            Since our inception, we have successfully distributed over 50,000 blankets to communities in need. Our initiatives not only provide warmth but also foster community spirit and engagement.
+                        </p>
+                    </div>
+
+                    <!-- Founder Section -->
+                <div class="col-md-6 text-center">
+
+                    <img src="~/Images/carol_founder.jpg" class="img-fluid founder-img" alt="Founder of 67 Blankets Mandela Day Application">
+                    <div class="Founder-header">
+                        <h4 style="color: black;">Founder: Carolyn Steyn</h4>
+                    </div>
+                    <p>
+                        Carolyn Steyn (née Barkhuizen; born 17 May 1960) is a South African media personality and founder of the non-profit organization, 67 Blankets for Nelson Mandela Day. In 2022, Carolyn Steyn received French Ordre national du Mérite.
+
+                    </p>
+
+                    <p>
+                        Steyn was born on 17 May 1960 in Johannesburg, South Africa. She attended Jeppe High School for Girls and matriculated in 1977.[2] She received an honours degree in Speech and Drama from the University of Witwatersrand in 1981 and qualification in Teacher's Licentiate in Speech and Drama from the University of South Africa in 1980.
+
+                        Personal life
+
+
+                    </p>
+
+                    <p>
+
+                        Steyn performed for the Performing Arts Company of Transvaal (PACT) between 1983 and 1987. During this time, Steyn performed in an adaptation of Elsa Joubert's Die Swerfjare van Poppie Nongena, in Poppie Nongena (1984) opposite Nomsa Nene. It ran for a year and received positive reviews.[6]
+
+
+                    </p>
+                    </div>
+                </div>
+
+            <!-- Partnerships Section -->
+            <div class="row partnership-section">
+                <div class="col-md-12 text-center">
+                    <div class="Partnerships-header">
+                        <h3>Partnerships</h3>
+                    </div>
+                        <p>
+                            We are proud to partner with various organizations, including:
+                        </p>
+                        <ul class="list-unstyled">
+                            <li><strong>Community Hearts NGO</strong> - Working together to provide blankets and food to local shelters.</li>
+                            <li><strong>Warmth Initiative</strong> - A collaboration to distribute blankets to schools in underprivileged areas.</li>
+                            <li><strong>Knitting for Change</strong> - An international partnership to promote knitting workshops and awareness.</li>
+                        </ul>
+                        <p>
+                            These collaborations enable us to reach more communities and provide support to those who need it most.
+                        </p>
+                    </div>
+                </div>
+
+            <!-- Testimonials Section -->
+            <!-- Testimonials Section -->
+            <div class="row testimonial-section">
+                <div class="col-md-12">
+                    <div class="testimonial-header">
+                        <h3 class="text-center">Testimonials</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <blockquote class="blockquote testimonial">
+                                <img src="~/Images/Pastor-Maureen-Sibadela.jpg" alt="Pastor Maureen Sibadela" class="img-fluid rounded-circle" style="max-width: 150px; height: auto; margin-bottom: 10px;">
+                                <p>"The blankets we received from 67 Blankets Mandela Day Application made a huge difference in our lives. Thank you for your kindness!"</p>
+                                <footer class="blockquote-footer">Pastor Maureen Sibadela, Local Community Leader</footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <blockquote class="blockquote testimonial">
+                                <img src="~/Images/Scelo.jpg" alt="Sipho Moyo" class="img-fluid rounded-circle" style="max-width: 150px; height: auto; margin-bottom: 10px;">
+                                <p class="mb-0">"Being part of this initiative has been life-changing. I’m proud to contribute to such a meaningful cause."</p>
+                                <footer class="blockquote-footer">Sipho Moyo, Volunteer Knitter</footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <blockquote class="blockquote testimonial">
+                                <img src="~/Images/Reta-Coetzee.jpg" alt="Reta Coetzee" class="img-fluid rounded-circle" style="max-width: 150px; height: auto; margin-bottom: 10px;">
+                                <p class="mb-0">"The blankets not only kept us warm but also brought a sense of community. We are grateful!"</p>
+                                <footer class="blockquote-footer">Reta Coetzee, Recipient</footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            var mainContent = document.getElementById("mainContent");
+
+            if (sidebar.style.left === "0px") {
+                sidebar.style.left = "-250px"; // Hide sidebar
+                mainContent.style.marginLeft = "0";
+            } else {
+                sidebar.style.left = "0"; // Show sidebar
+                mainContent.style.marginLeft = "250px"; // Adjust main content
+            }
+        }
+    </script>
+    </body>
+
+    </html>

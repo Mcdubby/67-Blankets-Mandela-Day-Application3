@@ -1,0 +1,51 @@
+﻿@model _67_Blankets_Mandela_Day_Application3.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2 style="text-align: center; color: #2c3e50;">@ViewBag.Title</h2>
+
+<p class="text-success" style="text-align: center; font-weight: bold; color: #27ae60;">@ViewBag.StatusMessage</p>
+
+<div style="max-width: 700px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px;">
+    <h4 style="color: #34495e; font-weight: bold; text-align: center;">Change Your Account Settings</h4>
+    <hr style="border-top: 2px solid #bdc3c7;">
+
+    <dl class="dl-horizontal" style="display: flex; flex-direction: column;">
+        <div style="margin-bottom: 15px;">
+        <dt style="font-weight: bold; color: #555;">Password:</dt>
+        <dd style="margin-left: 10px;">
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword", null, new { @style = "color: #3498db; text-decoration: none;" })
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword", null, new { @style = "color: #3498db; text-decoration: none;" })
+            }
+            ]
+        </dd>
+</div>
+
+<div style="margin-bottom: 15px;">
+    <dt style="font-weight: bold; color: #555;">External Logins:</dt>
+    <dd style="margin-left: 10px;">
+        @Model.Logins.Count [
+        @Html.ActionLink("Manage", "ManageLogins", null, new { @style = "color: #3498db; text-decoration: none;" })
+        ]
+    </dd>
+</div>
+
+<div style="margin-bottom: 15px;">
+    <dt style="font-weight: bold; color: #555;">Two-Factor Authentication:</dt>
+    <dd style="margin-left: 10px; color: #888;">
+        <p>
+            Two-factor authentication providers are not configured. See
+            <a href="https://go.microsoft.com/fwlink/?LinkId=403804" style="color: #e74c3c;">this article</a>
+            for details on setting up this ASP.NET application to support two-factor authentication.
+        </p>
+    </dd>
+</div>
+    </dl>
+</div>

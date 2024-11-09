@@ -1,0 +1,422 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Page</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        /* Add CSS styling */
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #ff0000;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .product-card {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s, transform 0.2s;
+        }
+
+            .product-card:hover {
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                transform: scale(1.05);
+            }
+
+            .product-card img {
+                width: 100%;
+                height: auto;
+                border-radius: 5px;
+            }
+
+        a.button, button {
+            display: inline-block;
+            background-color: #ff0000;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cart {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+
+        .sidebar {
+            position: fixed; /* Make sidebar fixed */
+            top: 60px; /* Sit below the navbar */
+            left: 0; /* Align to the left */
+            height: calc(100vh - 60px); 
+            width: 250px;
+            background-color: black; 
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 0 10px 10px 0; 
+            transition: left 0.3s; 
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 15px 20px;
+                text-decoration: none;
+                display: block;
+                font-weight: bold;
+                transition: background-color 0.3s;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+                .sidebar a:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #000000;
+                }
+
+        .menu-button {
+            position: fixed;
+            top: 10px; 
+            left: 10px; 
+            background-color: black; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1100; 
+            transition: background-color 0.3s;
+            color: white;
+        }
+
+            .menu-button:hover {
+                background-color: white;
+                color: #fff;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="welcome-message" style="text-align: center; padding: 20px; background-color: #ff0000; border-radius: 8px; margin-top: 20px;">
+        <h2 style="color: #fff;">Welcome to Our Shop!</h2>
+        <p style="font-size: 18px; color: #fff; max-width: 600px; margin: 0 auto;">
+            We're thrilled to have you here! Discover a variety of items handpicked just for you. Whether you're looking for unique gifts, essential products, or something to brighten up your day, we have something special waiting for you. Take your time, browse around, and enjoy shopping!
+        </p>
+    </div>
+
+
+    <button class="menu-button" onclick="toggleSidebar()">☰ Menu</button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="javascript:void(0)" onclick="toggleSidebar()">Close ×</a>
+        <a href="@Url.Action("Index", "Home")">Home</a>
+        <a href="@Url.Action("About", "Home")">About Us</a>
+        <a href="@Url.Action("Ambassador", "Home")">Ambassador Form</a>
+        <a href="@Url.Action("Donor", "Home")">Donor Form</a>
+        <a href="@Url.Action("Events", "Home")"> Events</a>
+        <a href="@Url.Action("Contact", "Home")">Contact Us</a>
+        <a href="@Url.Action("Admin_Login", "Home")"> Admin</a>
+    </div>
+
+    <main>
+        <h2 style="color:white ;">Featured Products</h2>
+        <div class="product-grid">
+            <!-- Sample product cards -->
+            <div class="product-card">
+                <img src="~/images/t-shirt(3).jpg" alt="Product 1">
+                <h3> Red T-Shirt( V-Neck)</h3>
+                <p>R180.00</p>
+                <label for="size1">Size:</label>
+                <select id="size1">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity1">Quantity:</label>
+                <input type="number" id="quantity1" min="1" value="1">
+                <button onclick="addToCart('Red T-Shirt( V-Neck)', 180.00, document.getElementById('size1').value, document.getElementById('quantity1').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/t-shirt(2).png" alt="Product 2">
+                <h3>67 Blankets Logo Red T-Shirt</h3>
+                <p>R180.00</p>
+                <label for="size2">Size:</label>
+                <select id="size2">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity2">Quantity:</label>
+                <input type="number" id="quantity2" min="1" value="1">
+                <button onclick="addToCart('67 Blankets Logo Red T-Shirt', 180.00, document.getElementById('size2').value, document.getElementById('quantity2').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/t-shirt(1).png" alt="Product 3">
+                <h3>10 Year Anny T-Sirt(RED)</h3>
+                <p>R180.00</p>
+                <label for="size3">Size:</label>
+                <select id="size3">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity3">Quantity:</label>
+                <input type="number" id="quantity3" min="1" value="1">
+                <button onclick="addToCart('10 Year Anny T-Sirt(RED)', 120.00, document.getElementById('size3').value, document.getElementById('quantity3').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/67_double_knit_fiesta_1.jpeg" alt="Product 4">
+                <h3>67 Blankets Yarn (Rainbow)</h3>
+                <p>R120.00</p>
+                <label for="size4">Size:</label>
+                <select id="size4">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity4">Quantity:</label>
+                <input type="number" id="quantity4" min="1" value="1">
+                <button onclick="addToCart('67 Blankets Yarn (Rainbow)', 120.00, document.getElementById('size4').value, document.getElementById('quantity4').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/67_double_knit_fiesta_2.jpeg" alt="Product 5">
+                <h3>67 Blankets Yarn ( Silver) </h3>
+                <p>R120.00</p>
+                <label for="size5">Size:</label>
+                <select id="size5">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity5">Quantity:</label>
+                <input type="number" id="quantity5" min="1" value="1">
+                <button onclick="addToCart('67 Blankets Yarn ( Silver)', 120.00, document.getElementById('size5').value, document.getElementById('quantity5').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/67_double_knit_fiesta_3.jpeg" alt="Product 6">
+                <h3>67 Blankets Yarn ( Red)</h3>
+                <p>R120.00</p>
+                <label for="size6">Size:</label>
+                <select id="size6">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity6">Quantity:</label>
+                <input type="number" id="quantity6" min="1" value="1">
+                <button onclick="addToCart('67 Blankets Yarn ( Red)', 120.00, document.getElementById('size6').value, document.getElementById('quantity6').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/baby_blanket_1.jpeg" alt="Product 7">
+                <h3>67 Blankets Fleece </h3>
+                <p>R200.00</p>
+                <label for="size7">Size:</label>
+                <select id="size7">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity7">Quantity:</label>
+                <input type="number" id="quantity7" min="1" value="1">
+                <button onclick="addToCart('67 Blankets Fleece', 200.00, document.getElementById('size7').value, document.getElementById('quantity7').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/baby_blanket_2.jpeg" alt="Product 8">
+                <h3>67 Blankets Fleece</h3>
+                <p>R200.00</p>
+                <label for="size8">Size:</label>
+                <select id="size8">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity8">Quantity:</label>
+                <input type="number" id="quantity8" min="1" value="1">
+                <button onclick="addToCart('67 Blankets Fleece', 200.00, document.getElementById('size8').value, document.getElementById('quantity8').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/baby_blanket_3.jpeg" alt="Product 9">
+                <h3>67 Blankets Fleece</h3>
+                <p>R200.00</p>
+                <label for="size9">Size:</label>
+                <select id="size9">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity9">Quantity:</label>
+                <input type="number" id="quantity9" min="1" value="1">
+                <button onclick="addToCart('67 Blankets Fleece', 200.00, document.getElementById('size9').value, document.getElementById('quantity9').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/knitted_bag_1.jpeg" alt="Product 10">
+                <h3>knitted Bag </h3>
+                <p>R150.00</p>
+                <label for="size10">Size:</label>
+                <select id="size10">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity10">Quantity:</label>
+                <input type="number" id="quantity10" min="1" value="1">
+                <button onclick="addToCart('knitted Bag', 150.00, document.getElementById('size10').value, document.getElementById('quantity10').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/knitted_bag_2.jpeg" alt="Product 11">
+                <h3>knitted Bag</h3>
+                <p>R150.00</p>
+                <label for="size11">Size:</label>
+                <select id="size11">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity11">Quantity:</label>
+                <input type="number" id="quantity11" min="1" value="1">
+                <button onclick="addToCart('knitted Bag', 150.00, document.getElementById('size11').value, document.getElementById('quantity11').value)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="~/images/knitted_bag_3.jpeg" alt="Product 12">
+                <h3>knitted Bag</h3>
+                <p>R150.00</p>
+                <label for="size12">Size:</label>
+                <select id="size12">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <label for="quantity12">Quantity:</label>
+                <input type="number" id="quantity12" min="1" value="1">
+                <button onclick="addToCart('knitted Bag', 150., document.getElementById('size12').value, document.getElementById('quantity12').value)">Add to Cart</button>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="cart" id="cart">
+            <h3>Your Cart</h3>
+            <div id="cartItems"></div>
+            <p>Total Price: R<span id="totalPrice">0.00</span></p>
+            <button id="checkoutButton" style="display:none;" onclick="checkout()">Checkout</button>
+        </div>
+    </main>
+
+
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price, size, quantity) {
+            const item = { name, price, size, quantity: parseInt(quantity) };
+            const existingItemIndex = cart.findIndex(cartItem => cartItem.name === name && cartItem.size === size);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += item.quantity;
+            } else {
+                cart.push(item);
+            }
+
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const totalPriceElement = document.getElementById('totalPrice');
+            cartItemsContainer.innerHTML = '';
+
+            let totalPrice = 0;
+            cart.forEach((item, index) => {
+                totalPrice += item.price * item.quantity;
+
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                        <span>${item.name} (${item.size}) - ${item.quantity} x $${item.price}</span>
+                        <button onclick="removeFromCart(${index})">Remove</button>
+                    `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            totalPriceElement.textContent = totalPrice.toFixed(2);
+
+            const checkoutButton = document.getElementById('checkoutButton');
+            checkoutButton.style.display = cart.length > 0 ? 'inline-block' : 'none';
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+        function checkout() {
+           window.location.href = '@Url.Action("Checkout", "Home")';
+
+        }
+
+
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            var mainContent = document.getElementById("mainContent");
+
+            if (sidebar.style.left === "0px") {
+                sidebar.style.left = "-250px"; // Hide sidebar
+                mainContent.style.marginLeft = "0";
+            } else {
+                sidebar.style.left = "0"; // Show sidebar
+                mainContent.style.marginLeft = "250px";
+            }
+        }
+
+    </script>
+</body>
+</html>

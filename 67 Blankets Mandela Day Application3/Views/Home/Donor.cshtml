@@ -1,0 +1,300 @@
+﻿@{
+    ViewBag.Title = "Donor";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+    <style>
+        /* Global styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed; /* Make sidebar fixed */
+            top: 60px; /* Sit below the navbar */
+            left: 0; /* Align to the left */
+            height: calc(100vh - 60px); /* Full height minus navbar */
+            width: 250px;
+            background-color: black; /* Match hero background color */
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 0 10px 10px 0; /* Rounded right corners */
+            transition: left 0.3s; /* Smooth transition for sidebar */
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 15px 20px;
+                text-decoration: none;
+                display: block;
+                font-weight: bold;
+                transition: background-color 0.3s;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+                .sidebar a:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #000000;
+                }
+
+        /* Menu button */
+        .menu-button {
+            position: fixed;
+            top: 10px; /* Position at the top */
+            left: 10px; /* Align to the left */
+            background-color: black; /* Same color as sidebar */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1100; /* Above sidebar */
+            transition: background-color 0.3s;
+            color: white;
+        }
+
+            .menu-button:hover {
+                background-color: white;
+                color: #fff;
+            }
+        /* Form Container */
+        .form-container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 40px;
+            margin: 40px auto;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            color: #333;
+        }
+
+            /* Form Heading */
+            .form-container h3 {
+                font-size: 1.75em;
+                color: #333;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+        /* Account Information */
+        .account-info {
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                color: #444;
+                margin-bottom: 5px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 1em;
+                transition: border-color 0.3s;
+            }
+
+                .form-group input:focus,
+                .form-group select:focus,
+                .form-group textarea:focus {
+                    border-color: #007BFF;
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                    outline: none;
+                }
+
+        /* Submit Button */
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+            .submit-button:hover {
+                background-color: #007bff;
+                transform: scale(1.05);
+            }
+
+        .note {
+            font-size: 0.9em;
+            color: #888;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menu Button -->
+    <button class="menu-button" onclick="toggleSidebar()">☰ Menu</button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="javascript:void(0)" onclick="toggleSidebar()">Close ×</a>
+        <a href="@Url.Action("Index", "Home")">Home</a>
+        <a href="@Url.Action("About", "Home")">About Us</a>
+        <a href="@Url.Action("Ambassador", "Home")">Ambassador Form</a>
+        <a href="@Url.Action("Donor", "Home")">Donor Form</a>
+        <a href="@Url.Action("Events", "Home")"> Events</a>
+        <a href="@Url.Action("Contact", "Home")">Contact Us</a>
+        <a href="@Url.Action("Admin_Login", "Home")"> Admin</a>
+    </div>
+
+    <!-- Main Form Content -->
+    <div class="form-container">
+        <h2>Donor Form</h2>
+        <h3>Support Our Cause</h3>
+        <p>Thank you for considering a donation. Please fill out the form below!</p>
+
+        <!-- Account Information Section -->
+        <div class="account-info">
+            <h4>Organization Account Information</h4>
+            <p><strong>Bank Name:</strong> First National Bank</p>
+            <p><strong>Branch:</strong> Johannesburg Central</p>
+            <p><strong>Account Number:</strong> 9876543210</p>
+            <p><strong>Account Type:</strong> Savings</p>
+            <p><strong>Swift Code:</strong> FNBJHB123</p>
+        </div>
+
+
+        <form id="donorForm" action="#" method="post" onsubmit="return handleFormSubmit(event);">
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required placeholder="Street, City, Zip Code">
+            </div>
+
+            <div class="form-group">
+                <label for="preferredContact">Preferred Contact Method:</label>
+                <select id="preferredContact" name="preferredContact" required>
+                    <option value="">Select Contact Method</option>
+                    <option value="email">Email</option>
+                    <option value="phone">Phone</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="donationType">Donation Type:</label>
+                <select id="donationType" name="donationType" required onchange="toggleDonationFields()">
+                    <option value="">Select Donation Type</option>
+                    <option value="money">Money</option>
+                    <option value="material">Material</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="moneyFields" style="display: none;">
+                <label for="amount">Amount (ZAR):</label>
+                <input type="number" id="amount" name="amount" min="1" step="0.01" placeholder="Enter amount in ZAR">
+            </div>
+
+            <div class="form-group" id="materialFields" style="display: none;">
+                <label for="materialDescription">Description of Materials:</label>
+                <textarea id="materialDescription" name="materialDescription" rows="4" placeholder="What materials are you donating?" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Submit Donation</button>
+        </form>
+
+        <p class="note">Your contributions make a difference!</p>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.left = (sidebar.style.left === '0px') ? '-250px' : '0px';
+        }
+
+        function toggleDonationFields() {
+            const donationType = document.getElementById('donationType').value;
+            document.getElementById('moneyFields').style.display = (donationType === 'money') ? 'block' : 'none';
+            document.getElementById('materialFields').style.display = (donationType === 'material') ? 'block' : 'none';
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const donationType = document.getElementById('donationType').value;
+
+            // Check if the user selected to donate money
+            if (donationType === 'money') {
+                // Validate the amount field
+                const amount = document.getElementById('amount').value;
+                if (!amount || amount <= 0) {
+                    alert("Please enter a valid donation amount.");
+                    return false; // Prevent form submission
+                }
+                console.log("Redirecting to Checkout.html...");
+                // Redirect to the payment page
+                window.location.href = 'Checkout.html'; // Replace with the actual URL for the payment page
+            } else {
+                // Show a thank-you message for material donations
+                alert("Thank you for your donation of materials! We appreciate your support.");
+
+                // Reset the form for further submissions
+                document.getElementById('donorForm').reset();
+                toggleDonationFields(); // Reset donation fields
+            }
+
+            return false; // Prevent form submission for both cases
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.about-page {
+    min-height: 100vh; /* Ensures the section covers the full height of the viewport */
+    padding: 50px 0;
+    background-image: url('/Images/background_About.jpg'); /* Replace with your actual image path */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    background-attachment: fixed; /* Keeps the background fixed as you scroll */
+    color:  white; /* Adjust text color for readability */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the content */
+    align-items: center; /* Horizontally center the content */
+}
+.about-section,
+.partnership-section,
+.testimonial-section,
+.future-goals-section {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 20px; 
+    border-radius: 10px; 
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.footer-links {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .footer-links li {
+        display: inline;
+        margin: 0 10px;
+    }
+
+.social-media {
+    margin-top: 10px;
+}
+
+    .social-media a {
+        margin: 0 5px;
+    }

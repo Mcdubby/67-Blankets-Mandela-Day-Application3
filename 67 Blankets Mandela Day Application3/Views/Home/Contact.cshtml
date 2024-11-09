@@ -1,0 +1,401 @@
+﻿ViewBag.Title = "Contact";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+    <style>
+
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff; /* Lighter background for a softer look */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        body {
+            background-image: url('/images/background.jpg'); /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #0056b3;
+            text-align: center;
+            text-transform: uppercase; /* For a more impactful heading */
+        }
+
+        h3 {
+            font-size: 1.75em; /* Slightly larger for emphasis */
+            margin-bottom: 20px;
+            color: #555;
+            text-align: center;
+        }
+
+        .contact-info {
+            background: white;
+            border-radius: 12px; /* More rounded corners */
+            padding: 40px; /* Increased padding for a spacious feel */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+            max-width: 600px;
+            margin: 20px auto; /* Centered with margin */
+            text-align: left;
+        }
+
+        address {
+            margin-bottom: 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        strong {
+            color: #0056b3;
+            font-weight: bold;
+        }
+
+        a {
+            color: #0056b3;
+            text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s; /* Added text-shadow for hover effect */
+        }
+
+            a:hover {
+                color: #007bff;
+                text-decoration: underline;
+                text-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle effect on hover */
+            }
+
+        .icon {
+            margin-right: 8px;
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: 12px; /* Consistent border radius */
+            padding: 30px; /* Increased padding for comfort */
+            margin-top: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-group {
+            margin-bottom: 20px; /* More space between form groups */
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold; /* Emphasize labels */
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 12px; /* Increased padding for inputs */
+                border: 1px solid #ccc;
+                border-radius: 6px; /* Softer corners */
+                transition: border-color 0.3s; /* Smooth transition on focus */
+            }
+
+                .form-group input:focus,
+                .form-group textarea:focus {
+                    border-color: #007bff; /* Highlight on focus */
+                    outline: none; /* Remove default outline */
+                }
+
+            .form-group button {
+                background-color: #0056b3;
+                color: white;
+                border: none;
+                padding: 12px 20px; /* Increased button padding */
+                border-radius: 6px; /* Softer corners */
+                cursor: pointer;
+                font-size: 1em; /* Consistent font size */
+                transition: background-color 0.3s, transform 0.2s; /* Added transform for button press */
+            }
+
+                .form-group button:hover {
+                    background-color: #007bff;
+                    transform: scale(1.05); /* Slightly grow on hover */
+                }
+
+        .social-media {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+            .social-media a {
+                margin: 0 15px; /* More space between icons */
+                font-size: 2em; /* Increased icon size for visibility */
+                color: #0056b3;
+                transition: color 0.3s, transform 0.3s; /* Added transform on hover */
+            }
+
+                .social-media a:hover {
+                    color: #007bff;
+                    transform: rotate(15deg); /* Slight rotation effect on hover */
+                }
+
+
+
+        .map-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+            .map-container iframe {
+                border: 0;
+                width: 100%;
+                height: 400px; /* Increased height for better visibility */
+                border-radius: 12px; /* Softer corners */
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            }
+
+        /* Sidebar styling */
+        .sidebar {
+            position: fixed; /* Make sidebar fixed */
+            top: 60px; /* Sit below the navbar */
+            left: 0; /* Align to the left */
+            height: calc(100vh - 60px); /* Full height minus navbar */
+            width: 250px;
+            background-color: black; /* Match hero background color */
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 0 10px 10px 0; /* Rounded right corners */
+            transition: left 0.3s; /* Smooth transition for sidebar */
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 15px 20px;
+                text-decoration: none;
+                display: block;
+                font-weight: bold;
+                transition: background-color 0.3s;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+                .sidebar a:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #000000;
+                }
+
+        /* Menu button styling */
+        .menu-button {
+            position: fixed;
+            top: 10px; /* Position at the top */
+            left: 10px; /* Align to the left */
+            background-color: black; /* Same color as sidebar */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1100; /* Above sidebar */
+            transition: background-color 0.3s;
+            color: white;
+        }
+
+            .menu-button:hover {
+                background-color: white;
+                color: #fff;
+            }
+
+        .contact-form {
+            background-color: #f9f9f9; /* Light background for contrast */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Inner spacing */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            max-width: 600px; /* Limit form width */
+            margin: 20px auto; /* Centered horizontally with some margin */
+        }
+
+            .contact-form h3 {
+                font-size: 24px; /* Larger font size for the title */
+                color: #333; /* Dark color for the title */
+                text-align: center; /* Centered title */
+                margin-bottom: 10px; /* Space below title */
+            }
+
+            .contact-form p {
+                font-size: 16px; /* Medium font size */
+                color: #666; /* Lighter color for instructions */
+                text-align: center; /* Centered instructions */
+                margin-bottom: 20px; /* Space below instructions */
+            }
+
+        .form-group {
+            margin-bottom: 15px; /* Space between form fields */
+        }
+
+            .form-group label {
+                display: block; /* Each label on its own line */
+                font-weight: bold; /* Bold labels */
+                margin-bottom: 5px; /* Space below label */
+                color: #444; /* Darker color for labels */
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                width: 100%; /* Full width inputs */
+                padding: 10px; /* Inner spacing */
+                border: 1px solid #ccc; /* Light border */
+                border-radius: 5px; /* Rounded input corners */
+                font-size: 16px; /* Larger font size for inputs */
+            }
+
+                .form-group input:focus,
+                .form-group select:focus,
+                .form-group textarea:focus {
+                    border-color: #007BFF; /* Blue border on focus */
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Soft blue glow */
+                }
+
+        button {
+            background-color: #007BFF; /* Blue background for button */
+            color: white; /* White text color */
+            padding: 10px 15px; /* Padding around button text */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners for button */
+            font-size: 16px; /* Font size for button text */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s; /* Smooth background color change */
+        }
+
+            button:hover {
+                background-color: #0056b3; /* Darker blue on hover */
+            }
+
+        .note {
+            font-size: 14px; /* Smaller font for note */
+            color: #888; /* Light gray for note */
+            text-align: center; /* Centered note */
+            margin-top: 20px; /* Space above note */
+        }
+
+        .form-group textarea {
+            width: 100%; /* Full width inputs */
+            padding: 10px; /* Inner spacing */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 5px; /* Rounded input corners */
+            font-size: 16px; /* Larger font size for inputs */
+            height: 150px; /* Increase height as needed */
+            resize: vertical; /* Allow vertical resizing */
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Button -->
+    <button class="menu-button" onclick="toggleSidebar()">☰ Menu</button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="javascript:void(0)" onclick="toggleSidebar()">Close ×</a>
+        <a href="@Url.Action("Index", "Home")">Home</a>
+        <a href="@Url.Action("About", "Home")">About Us</a>
+        <a href="@Url.Action("Ambassador", "Home")">Ambassador Form</a>
+        <a href="@Url.Action("Donor", "Home")">Donor Form</a>
+        <a href="@Url.Action("Events", "Home")"> Events</a>
+        <a href="@Url.Action("Contact", "Home")">Contact Us</a>
+        <a href="@Url.Action("Admin_Login", "Home")"> Admin</a>
+    </div>
+
+    <h2>Get in Touch</h2>
+    <div class="contact-info">
+        <h3>Contact Us</h3>
+        <address>
+            <strong>Email:</strong> <a href="mailto:67BlanketsMandelaDayInitiative@gmail.com">67BlanketsMandelaDayInitiative@gmail.com</a><br>
+            <strong>Phone:</strong> <a href="tel:+27 67 833 0418">+27 67 833 0418</a><br>
+            <strong>Address:</strong> 27 St Andrews Rd, Parktown, Johannesburg, 2193
+        </address>
+    </div>
+
+    <div class="contact-form">
+        <h3>Send Us a Message</h3>
+        <p>We would love to hear from you! Please fill out the form below to reach out with any questions, comments, or suggestions.</p>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+            </div>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" placeholder="Enter your location" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <select id="subject" name="subject" required>
+                    <option value="" disabled selected>Select a subject</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="feedback">Feedback</option>
+                    <option value="partnership">Partnership Opportunities</option>
+                    <option value="donations">Donations</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="8" required placeholder="Type your message here..."></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Send Message</button>
+            </div>
+        </form>
+        <p class="note">Note: We strive to respond to all inquiries within 48 hours. Thank you for reaching out!</p>
+    </div>
+
+
+
+    <div class="social-media">
+        <h3>Connect with Us</h3>
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-square"></i></a>
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter-square"></i></a>
+        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram-square"></i></a>
+    </div>
+
+    <div class="map-container">
+        <h3>Our Location</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6532.726953412727!2d28.03945748219097!3d-26.178445811545163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c15589b6fd9%3A0xb82b6d6f6254398f!2sWits%20Linder%20Auditorium!5e0!3m2!1sen!2sza!4v1730375079436!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            var mainContent = document.getElementById("mainContent");
+
+            if (sidebar.style.left === "0px") {
+                sidebar.style.left = "-250px"; // Hide sidebar
+                mainContent.style.marginLeft = "0";
+            } else {
+                sidebar.style.left = "0"; // Show sidebar
+                mainContent.style.marginLeft = "250px";
+            }
+        }
+    </script>
+</body>
+</html>"
